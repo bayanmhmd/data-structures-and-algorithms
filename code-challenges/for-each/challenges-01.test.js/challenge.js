@@ -33,12 +33,16 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const addValues = (arr, value) => {
-  // Solution code here...
+  arr.push(value); // solution here
 };
 
 const addNumbers = (num, arr, times, callback) => {
-  // Solution code here...
+  for (let i = 0; i < times; i++) { // solution here 
+      callback(arr, num);
+    }
+    return arr;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -53,13 +57,17 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const removeOne = (num, arr) => {
-  // Solution code here...
+  if (num % 3 === 2) {
+      arr.pop();
+    } // Solution code here...
 };
 
 const removeElements = (arr, callback) => {
-  // Solution code here...
+  for (let i = 0; i < arr.length; i++) {
+      callback(arr[i], arr);
+    }
+    return arr; // Solution code here...
 };
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
 
@@ -68,7 +76,12 @@ Write a function named removeWithForEach that produces the same output as challe
 
 const removeWithForEach = (arr, callback) => {
   // Solution code here...
+  arr.forEach( function(value, idx, arr) {
+    callback(value, arr);
+  });
+  return arr;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -82,8 +95,13 @@ This anonymous function should accept up to three arguments: the element, the in
 
 const removeWithAnon = (arr) => {
   // Solution code here...
+  arr.forEach( anonymous() );
+  return arr;
 };
 
+const anonymous = (value, idx, arr) => {
+  callback(value, arr);
+};
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
 
