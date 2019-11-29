@@ -6,8 +6,8 @@ Write a function named validatePin that uses a regular expression pattern to val
 If the PIN is four numerical digits long, return true. Otherwise, return false.
 ------------------------------------------------------------------------------------------------ */
 
-const validatePin = (pin) => {
-  // Solution code here...
+const validatePin = pin => {
+  return /^\d{4}$/.test(pin);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -23,8 +23,9 @@ Return either true or false.
 Note: if you ever need to validate an email using a regex in practice, the Internet has the actual regex you should use. It's many many lines long.
 ------------------------------------------------------------------------------------------------ */
 
-const validateEmail = (email) => {
-  // Solution code here...
+const validateEmail = email => {
+  return /^[\w\d]+(\.[\w\d]+)?@[\w\d]+\.(net|com|org)$/.test(email);
+  // return /^\w+(\.\w+)?@\w+\.(net|com|org)$/.test(email);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -44,8 +45,8 @@ Your function should include a single regular expression pattern that matches an
 Return either true or false.
 ------------------------------------------------------------------------------------------------ */
 
-const validatePhoneNumber = (phoneNumber) => {
-  // Solution code here...
+const validatePhoneNumber = phoneNumber => {
+  return /^(\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}$/.test(phoneNumber);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -56,7 +57,11 @@ findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])
 ------------------------------------------------------------------------------------------------ */
 
 const findTagNames = elements => {
-  // Solution code here...
+  let tags = [];
+  elements.forEach(str => {
+    tags = tags.concat(str.match(/\/\w+/g));
+  });
+  return tags;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -96,7 +101,7 @@ describe('Testing challenge 2', () => {
     expect(validateEmail('joe.schmoe@codefellows.net')).toBeTruthy();
   });
 
-  test ('It should fail things that aren\'t email addresses', () => {
+  test("It should fail things that aren't email addresses", () => {
     expect(validateEmail('justastring')).toBeFalsy();
     expect(validateEmail('missing@adomain')).toBeFalsy();
     expect(validateEmail('@noname.com')).toBeFalsy();
@@ -135,9 +140,16 @@ describe('Testing challenge 3', () => {
 
 describe('Testing challenge 4', () => {
   test('It should return the closing tags', () => {
-    expect(findTagNames(['<h1>Hello, world!</h1>', '<p>Welcome to my site</p>'])).toStrictEqual([ '/h1', '/p' ]);
+    expect(
+      findTagNames(['<h1>Hello, world!</h1>', '<p>Welcome to my site</p>'])
+    ).toStrictEqual(['/h1', '/p']);
   });
   test('It should work if there are multiple closing tags in a single string', () => {
-    expect(findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])).toStrictEqual([ '/h1', '/div', '/p' ]);
+    expect(
+      findTagNames([
+        '<div><h1>Hello, world!</h1></div>',
+        '<p>Welcome to my site</p>'
+      ])
+    ).toStrictEqual(['/h1', '/div', '/p']);
   });
 });
