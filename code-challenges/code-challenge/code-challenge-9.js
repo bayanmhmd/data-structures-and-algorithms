@@ -169,7 +169,7 @@ Write a function named countPrimeNumbers that, given an array elements as input,
 You are welcome to use the provided isPrime function.
 ------------------------------------------------------------------------------------------------ */
 
-const isPrime = value => {
+const isPrime = (value) => {
   for (let i = 2; i < value; i++) {
     if (value % i === 0) {
       return false;
@@ -178,13 +178,8 @@ const isPrime = value => {
   return value > 1;
 };
 
-const countPrimeNumbers = arr => {
-  return arr.reduce((acc, val) => {
-    if (isPrime(val)) {
-      acc++;
-    }
-    return acc;
-  }, 0);
+const countPrimeNumbers = (arr) => {
+  // Solution code here...
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -198,40 +193,34 @@ const snorlaxData = {
     {
       stat: {
         url: 'https://pokeapi.co/api/v2/stat/6/',
-        name: 'speed'
+        name: 'speed',
       },
       effort: 5,
-      baseStat: 30
+      baseStat: 30,
     },
     {
       stat: {
         url: 'https://pokeapi.co/api/v2/stat/5/',
-        name: 'special-defense'
+        name: 'special-defense',
       },
       effort: 2,
-      baseStat: 110
+      baseStat: 110,
     },
     {
       stat: {
         url: 'https://pokeapi.co/api/v2/stat/4/',
-        name: 'special-attack'
+        name: 'special-attack',
       },
       effort: 9,
-      baseStat: 65
-    }
+      baseStat: 65,
+    },
   ],
   name: 'snorlax',
-  weight: 4600
+  weight: 4600,
 };
 
 const extractStat = (statName, arr) => {
-  const stat = arr.reduce((acc, val) => {
-    if (val.stat.name === statName) {
-      acc = val;
-    }
-    return acc;
-  }, {});
-  return stat.stat ? stat : null;
+  // Solution code here...
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -241,15 +230,8 @@ Write a function named extractChildren that, given the array of characters from 
 2) Then, uses reduce to return an array of all the children's names in the filtered array
 ------------------------------------------------------------------------------------------------ */
 
-const extractChildren = arr => {
-  return arr
-    .filter(c => /a/.test(c.name))
-    .reduce((acc, val) => {
-      if (val.children) {
-        acc = acc.concat(val.children);
-      }
-      return acc;
-    }, []);
+const extractChildren = (arr) => {
+  // Solution code here...
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -267,13 +249,7 @@ describe('Testing challenge 1', () => {
 
 describe('Testing challenge 2', () => {
   test('It should return an array continaing the names of the characters', () => {
-    expect(returnNames(starWarsData)).toStrictEqual([
-      'Luke Skywalker',
-      'C-3PO',
-      'R2-D2',
-      'Darth Vader',
-      'Leia Organa'
-    ]);
+    expect(returnNames(starWarsData)).toStrictEqual([ 'Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa' ]);
     expect(returnNames(starWarsData).length).toStrictEqual(5);
   });
 });
@@ -292,7 +268,7 @@ describe('Testing challenge 4', () => {
 
 describe('Testing challenge 5', () => {
   test('It should return the average of the numbers in the array', () => {
-    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85])).toStrictEqual(64);
+    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85 ])).toStrictEqual(64);
   });
 });
 
@@ -304,28 +280,13 @@ describe('Testing challenge 6', () => {
 
 describe('Testing challenge 7', () => {
   test('It should return any stats that match the input', () => {
-    expect(extractStat('speed', snorlaxData.stats)).toStrictEqual({
-      stat: { url: 'https://pokeapi.co/api/v2/stat/6/', name: 'speed' },
-      effort: 5,
-      baseStat: 30
-    });
+    expect(extractStat('speed', snorlaxData.stats)).toStrictEqual({ stat: { url: 'https://pokeapi.co/api/v2/stat/6/', name: 'speed' }, effort: 5, baseStat: 30 });
   });
 });
 
 describe('Testing challenge 8', () => {
   test('It should return an array containing the names of the children', () => {
-    expect(extractChildren(characters)).toStrictEqual([
-      'Robb',
-      'Sansa',
-      'Arya',
-      'Bran',
-      'Rickon',
-      'Drogon',
-      'Rhaegal',
-      'Viserion',
-      'Margaery',
-      'Loras'
-    ]);
+    expect(extractChildren(characters)).toStrictEqual([ 'Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras' ]);
     expect(extractChildren(characters).length).toStrictEqual(10);
   });
 });
