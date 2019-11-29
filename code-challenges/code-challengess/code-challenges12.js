@@ -8,7 +8,20 @@ For this example, the total at 9:00 a.m. is 17 + 26 + 7 + 5 + 33, or 88 total co
 Return the array of the total number of cookies sold per hour for all of the stores combined.
 ------------------------------------------------------------------------------------------------ */
 
-const hoursOpen = ['9 a.m.', '10 a.m.', '11 a.m.', '12 p.m.', '1 p.m.', '2 p.m.', '3 p.m.', '4 p.m.', '5 p.m.', '6 p.m.', '7 p.m.', '8 p.m.'];
+const hoursOpen = [
+  '9 a.m.',
+  '10 a.m.',
+  '11 a.m.',
+  '12 p.m.',
+  '1 p.m.',
+  '2 p.m.',
+  '3 p.m.',
+  '4 p.m.',
+  '5 p.m.',
+  '6 p.m.',
+  '7 p.m.',
+  '8 p.m.'
+];
 
 const firstPike = [17, 18, 23, 24, 24, 12, 13, 27, 30, 20, 24, 18];
 const seaTac = [26, 5, 5, 59, 23, 39, 38, 20, 30, 7, 59, 43];
@@ -18,9 +31,14 @@ const alkiBeach = [33, 31, 147, 130, 27, 93, 38, 126, 141, 63, 46, 17];
 
 const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 
-const grandTotal = (stores) => {
-  // Solution code here...
-
+const grandTotal = stores => {
+  return stores.reduce((acc, store) => {
+    for (let i = 0; i < store.length; i++) {
+      if (!acc[i]) acc[i] = 0;
+      acc[i] += store[i];
+    }
+    return acc;
+  }, []);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -31,7 +49,14 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 ------------------------------------------------------------------------------------------------ */
 
 const salesData = (hours, data) => {
-  // Solution code here...
+  const sales = [];
+  data.forEach((d, idx) => {
+    sales.push({
+      sales: d + ' cookies',
+      time: hours[idx]
+    });
+  });
+  return sales;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -40,19 +65,34 @@ Write a function named howManyTreats that will return the quantity of treats you
 ------------------------------------------------------------------------------------------------ */
 
 const errands = [
-  { store: 'Grocery store',
-    items: [ { name: 'Eggs', quantity: 12 }, { name: 'Milk', quantity: 1 }, { name: 'Apples', quantity: 3 }]
+  {
+    store: 'Grocery store',
+    items: [
+      { name: 'Eggs', quantity: 12 },
+      { name: 'Milk', quantity: 1 },
+      { name: 'Apples', quantity: 3 }
+    ]
   },
-  { store: 'Drug store',
-    items: [ { name: 'Toothpaste', quantity: 1 }, { name: 'Toothbrush', quantity: 3 }, { name: 'Mouthwash',quantity: 1 } ]
+  {
+    store: 'Drug store',
+    items: [
+      { name: 'Toothpaste', quantity: 1 },
+      { name: 'Toothbrush', quantity: 3 },
+      { name: 'Mouthwash', quantity: 1 }
+    ]
   },
-  { store: 'Pet store',
-    items: [ { name: 'Cans of food', quantity: 8 }, { name: 'Treats', quantity: 24 }, { name: 'Leash', quantity: 1 } ]
+  {
+    store: 'Pet store',
+    items: [
+      { name: 'Cans of food', quantity: 8 },
+      { name: 'Treats', quantity: 24 },
+      { name: 'Leash', quantity: 1 }
+    ]
   }
 ];
 
-const howManyTreats = (arr) => {
-  // Solution code here...
+const howManyTreats = arr => {
+  return arr[2].items[1].quantity;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -70,9 +110,8 @@ The top row of the board is considered row zero and row numbers increase as they
 ------------------------------------------------------------------------------------------------ */
 
 const battleship = (board, row, col) => {
-  //  Solution code here...
+  return board[row][col] === '#' ? 'hit' : 'miss';
 };
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 Write a function named calculateProduct that takes in a two-dimensional array of numbers, multiplies all of the numbers in each array, and returns the final product. This function should work for any number of inner arrays.
